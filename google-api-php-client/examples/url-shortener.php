@@ -40,7 +40,7 @@ if (!$oauth_credentials = getOAuthCredentialsFile()) {
  * The redirect URI is to this page, e.g:
  * http://localhost:8080/simplefileupload.php
  ************************************************/
-$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+$redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
 
 $client = new Google_Client();
 $client->setAuthConfig($oauth_credentials);
