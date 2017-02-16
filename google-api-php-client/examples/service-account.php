@@ -51,7 +51,7 @@ if ($credentials_file = checkServiceAccountCredentialsFile()) {
   return;
 }
 
-$client->setApplicationName("Client_Library_Examples");
+$client->setApplicationName("DATO-SEO");
 $client->setScopes(['https://www.googleapis.com/auth/books']);
 $service = new Google_Service_Books($client);
 

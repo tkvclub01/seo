@@ -33,7 +33,7 @@ echo pageHeader("Batching Queries");
   using the anonymous quota.
  ************************************************/
 $client = new Google_Client();
-$client->setApplicationName("Client_Library_Examples");
+$client->setApplicationName("DATO-SEO");
 
 // Warn if the API key isn't set.
 if (!$apiKey = getApiKey()) {
