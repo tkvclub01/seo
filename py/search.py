@@ -8,8 +8,8 @@ from oauth2client.client import OAuth2WebServerFlow
 
 
 # Copy your credentials from the console
-CLIENT_ID = '128153575894-65vr9d6hb7f20j0nl7hhg6t21l5o8m15.apps.googleusercontent.com'
-CLIENT_SECRET = '2jBhlbS0Wq8R8CPsrAZBeo0t'
+CLIENT_ID = '128153575894-fmsqsdrifhf2cdbjtjlptgrankkdb853.apps.googleusercontent.com'
+CLIENT_SECRET = 'Z4GibOCA5h0g4rsWQlPAQH8E'
 
 # Check https://developers.google.com/webmaster-tools/search-console-api-original/v3/ for all available scopes
 OAUTH_SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly'
