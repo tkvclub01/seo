@@ -39,6 +39,7 @@
         </ul>
       
       <ul class="nav navbar-nav navbar-right">
+      	<li><a href="https://tools.clads.link">BACK TO SEARCH RANK</a></li>
         <li><a href="logout.php">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
