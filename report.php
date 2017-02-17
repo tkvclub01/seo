@@ -166,6 +166,7 @@ if ($_POST) {
 		$file_py_path = 'python /home/admin/web/tools.clads.link/public_shtml/search.py ';
 		$result = passthru ( $file_py_path . trim ( $data_py ) );
 		$result = ob_get_clean ();
+		var_dump($result);die();
 		// rank@@url
 		$result = explode ( '@@', trim ( $result ) );
 		if (count ( $result ) > 1) {
