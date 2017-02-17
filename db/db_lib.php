@@ -116,7 +116,7 @@ function list_keyword($keyword, $id) {
 }
 function get_content_by_date($string_date, $keywords, $domain, $search_engine) {
 	// Clean the post data and make usable
-	$domain = filter_var ( $_POST ['domain'], FILTER_SANITIZE_STRING );
+	$domain = filter_var ( $domain, FILTER_SANITIZE_STRING );
 	$keywords = filter_var($keywords, FILTER_SANITIZE_STRING);
 	// Remove begining http and trailing /
 	$domain = trim($domain);
@@ -133,7 +133,6 @@ function get_content_by_date($string_date, $keywords, $domain, $search_engine) {
 		$condition .= ' and (';		
 		for($k = 0; $k < count ( $list_keywords ); $k ++) {
 			$keywords = trim($list_keywords [$k]);
-			$keywords = strstr ( $keywords, ' ' ) ? str_replace ( ' ', '+', $keywords ) : $keywords;			
 			if ($k == (count ( $list_keywords ) - 1)) {
 				$condition .= " keyword = '$keywords' ";
 			}else{
@@ -148,7 +147,6 @@ function get_content_by_date($string_date, $keywords, $domain, $search_engine) {
 	}
 
 	$sql = "SELECT * FROM (SELECT * FROM page_rank WHERE date = '$date_rp' and search_engine = '$search_engine'" . $condition . 'ORDER BY id DESC) AS tbl GROUP BY keyword';
-	var_dump($sql);
 	$db->query ( $sql );
 	while ( $row = $db->fetch_array () ) {
 		$list_data [] = array (
