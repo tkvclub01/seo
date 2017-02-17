@@ -161,10 +161,11 @@ if ($_POST) {
 		} else {
 			$url_para = "." . $url_para;
 		}
-		$data = $url_para . "@@" . $domain . "@@" . $keyword;
+		$data_py = $url_para . "@@" . $domain . "@@" . $keyword;
+		var_dump($data_py);
 		ob_start ();
 		$file_py_path = 'python search.py ';
-		$result = passthru ( $file_py_path . trim ( $data ) );
+		$result = passthru ( $file_py_path . trim ( $data_py ) );
 		$result = ob_get_clean ();
 		// rank@@url
 		$result = explode ( '@@', trim ( $result ) );
