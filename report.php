@@ -163,7 +163,6 @@ if ($_POST) {
 		}
 		$data_py = $url_para . "@@" . $domain . "@@" . $keyword;
 		$data_py = str_replace(" ", "+", $data_py);
-		var_dump($data_py);
 		ob_start ();
 		$file_py_path = 'python /home/admin/web/tools.clads.link/public_shtml/search.py ';
 		$result = passthru ( $file_py_path . trim ( $data_py ) );
