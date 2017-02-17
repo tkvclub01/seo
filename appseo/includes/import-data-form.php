@@ -29,9 +29,10 @@ include_once 'lib/PHPExcel/IOFactory.php';
 			$path = 'upload/'.$file_name;
 			$upload = move_uploaded_file($_FILES['file_name']['tmp_name'], $path);
 			error_reporting(E_ERROR | E_PARSE);
+			
 			copy($file_name, $path);
+			
 			$objPHPExcel = PHPExcel_IOFactory::load($path);
-			var_dump($objPHPExcel);die();
 			foreach ($objPHPExcel->getWorksheetIterator() as $worksheet) {
 				$worksheetTitle     = $worksheet->getTitle();
 				$highestRow         = $worksheet->getHighestRow(); // e.g. 10
@@ -39,7 +40,7 @@ include_once 'lib/PHPExcel/IOFactory.php';
 				$highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
 				$nrColumns = ord($highestColumn) - 64;
 			}
-			
+			echo "test";
 			for ($row = 4; $row <= $highestRow; ++ $row) {
 				$val=array();
 				for ($col = 0; $col < $highestColumnIndex; ++ $col) {
