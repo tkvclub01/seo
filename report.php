@@ -164,7 +164,6 @@ if ($_POST) {
 		$data_py = $url_para . "@@" . $domain . "@@" . $keyword;
 		$data_py = str_replace(" ", "+", $data_py);
 		$file_py_path = 'python /home/admin/web/tools.clads.link/public_shtml/search.py ';
-		ob_start ();
 		$result = passthru ( $file_py_path . trim ( $data_py ) );
 		$result = ob_get_clean ();
 		// rank@@url
@@ -182,96 +181,96 @@ if ($_POST) {
 		} else {
 			add_result ( $date, $keyword, $rank, $path, 'English', trim ( $_POST ['googleUrl'] ), $domain );
 		}
-	}
-	
-	
-	if (isset ( $_POST ['report'] )) {
-		if (isset ( $_POST ['reportdate'] )) {
-			$row = get_content_by_date ( $_POST ['reportdate'], $_POST ['keywords'], $_POST ['domain'], trim ( $_POST ['googleUrl'] ) );
-		} else {
-			echo "Please back to index";
 		}
-		for($i = 0; $i < count ( $row ); $i ++) {
-			// Write content to excel
-			$objPHPExcel->getActiveSheet ()->setCellValue ( 'A' . strval ( $i + 4 ), $row [$i] ['date'] );
-			$objPHPExcel->getActiveSheet ()->setCellValue ( 'B' . strval ( $i + 4 ), $row [$i] ['keyword'] );
-			$objPHPExcel->getActiveSheet ()->setCellValue ( 'C' . strval ( $i + 4 ), $row [$i] ['engine'] );
-			$objPHPExcel->getActiveSheet ()->setCellValue ( 'D' . strval ( $i + 4 ), 'English' );
-			$objPHPExcel->getActiveSheet ()->setCellValue ( 'E' . strval ( $i + 4 ), $row [$i] ['rank'] );
-			$objPHPExcel->getActiveSheet ()->setCellValue ( 'F' . strval ( $i + 4 ), $row [$i] ['pre_rank'] );
-			?>
-		<tr>
-			<td><?php echo $row[$i]['date']; ?></td>
-			<td><?php echo str_replace("+"," ",$row[$i]['keyword']);?></td>
-			<td><?php echo $row[$i]['engine']; ?></td>
-			<td><?php echo "English"; ?></td>
-			<td><?php echo $row[$i]['rank']; ?></td>
-			<td><?php 
-			$cur_rank = $row [$i] ['rank'];
-			$pre_rank = $row [$i] ['pre_rank'];
-			$change = $cur_rank - $pre_rank;
-			
-			// create image
-			$objDrawingDown = new PHPExcel_Worksheet_Drawing ();
-			$objDrawingDown->setName ( 'Down image' );
-			$objDrawingDown->setDescription ( 'Down image' );
-			$objDrawingDown->setPath ( 'icon/down.png' );
-			
-			$objDrawingUp = new PHPExcel_Worksheet_Drawing ();
-			$objDrawingUp->setName ( 'Up image' );
-			$objDrawingUp->setDescription ( 'Up image' );
-			$objDrawingUp->setPath ( 'icon/up.png' );
-			
-			if ($change > 0) {
-				if ($pre_rank == 0) {
-					echo "<font style='color: green;'>" . str_replace ( '-', '', ($pre_rank - $cur_rank) ) . "</font> <img src='icon/up.jpg'>";
-					$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), str_replace ( '-', '', ($pre_rank - $cur_rank) ) );
-					$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_green );
-					$objDrawingUp->setCoordinates ( 'H' . strval ( $i + 4 ) );
-					$objDrawingUp->setWorksheet ( $objPHPExcel->getActiveSheet () );
-				} else {
-					echo "<font style='color: red;'>" . ($cur_rank - $pre_rank) . "</font> <img src='icon/down.jpg'>";
-					$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), ($cur_rank - $pre_rank) );
-					$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_red );
-					$objDrawingDown->setCoordinates ( 'H' . strval ( $i + 4 ) );
-					$objDrawingDown->setWorksheet ( $objPHPExcel->getActiveSheet () );
-				}
-			} else if ($change < 0) {
-				if ($cur_rank == 0) {
-					echo "<font style='color: red;'>" . str_replace ( '-', '', ($cur_rank - $pre_rank) ) . "</font> <img src='icon/down.jpg'>";
-					$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), str_replace ( '-', '', ($pre_rank - $cur_rank) ) );
-					$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_red );
-					$objDrawingDown->setCoordinates ( 'H' . strval ( $i + 4 ) );
-					$objDrawingDown->setWorksheet ( $objPHPExcel->getActiveSheet () );
-				} else {
-					echo "<font style='color: green;'>" . ($pre_rank - $cur_rank) . "</font> <img src='icon/up.jpg'>";
-					$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), ($cur_rank - $pre_rank) );
-					$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_green );
-					$objDrawingUp->setCoordinates ( 'H' . strval ( $i + 4 ) );
-					$objDrawingUp->setWorksheet ( $objPHPExcel->getActiveSheet () );
-				}
+		
+		
+		if (isset ( $_POST ['report'] )) {
+			if (isset ( $_POST ['reportdate'] )) {
+				$row = get_content_by_date ( $_POST ['reportdate'], $_POST ['keywords'], $_POST ['domain'], trim ( $_POST ['googleUrl'] ) );
 			} else {
-				echo "<font style='color: green;'> 0 </font>";
-				$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), '0' );
-				$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_green );
+				echo "Please back to index";
 			}
-			?></td>
-			<td><?php 
-			if (isset ( $row [$i] ['path'] )) {
-				echo '<a href="http://' . $row [$i] ['path'] . '">' . $row [$i] ['path'] . '</a>';
-				$objPHPExcel->getActiveSheet ()->setCellValue ( 'I' . strval ( $i + 4 ), $row [$i] ['path'] );
+			for($i = 0; $i < count ( $row ); $i ++) {
+				// Write content to excel
+				$objPHPExcel->getActiveSheet ()->setCellValue ( 'A' . strval ( $i + 4 ), $row [$i] ['date'] );
+				$objPHPExcel->getActiveSheet ()->setCellValue ( 'B' . strval ( $i + 4 ), $row [$i] ['keyword'] );
+				$objPHPExcel->getActiveSheet ()->setCellValue ( 'C' . strval ( $i + 4 ), $row [$i] ['engine'] );
+				$objPHPExcel->getActiveSheet ()->setCellValue ( 'D' . strval ( $i + 4 ), 'English' );
+				$objPHPExcel->getActiveSheet ()->setCellValue ( 'E' . strval ( $i + 4 ), $row [$i] ['rank'] );
+				$objPHPExcel->getActiveSheet ()->setCellValue ( 'F' . strval ( $i + 4 ), $row [$i] ['pre_rank'] );
+				?>
+				<tr>
+					<td><?php echo $row[$i]['date']; ?></td>
+					<td><?php echo str_replace("+"," ",$row[$i]['keyword']);?></td>
+					<td><?php echo $row[$i]['engine']; ?></td>
+					<td><?php echo "English"; ?></td>
+					<td><?php echo $row[$i]['rank']; ?></td>
+					<td><?php echo $row[$i]['pre_rank']; ?></td>
+					<td><?php
+					$cur_rank = $row [$i] ['rank'];
+					$pre_rank = $row [$i] ['pre_rank'];
+					$change = $cur_rank - $pre_rank;
+					
+					// create image
+					$objDrawingDown = new PHPExcel_Worksheet_Drawing ();
+					$objDrawingDown->setName ( 'Down image' );
+					$objDrawingDown->setDescription ( 'Down image' );
+					$objDrawingDown->setPath ( 'icon/Down.png' );
+					
+					$objDrawingUp = new PHPExcel_Worksheet_Drawing ();
+					$objDrawingUp->setName ( 'Up image' );
+					$objDrawingUp->setDescription ( 'Up image' );
+					$objDrawingUp->setPath ( 'icon/up.png' );
+					
+					if ($change > 0) {
+						if ($pre_rank == 0) {
+							echo "<font style='color: green;'>" . str_replace ( '-', '', ($pre_rank - $cur_rank) ) . "</font> <img src='icon/up.jpg'>";
+							$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), str_replace ( '-', '', ($pre_rank - $cur_rank) ) );
+							$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_green );
+							$objDrawingUp->setCoordinates ( 'H' . strval ( $i + 4 ) );
+							$objDrawingUp->setWorksheet ( $objPHPExcel->getActiveSheet () );
+						} else {
+							echo "<font style='color: red;'>" . ($cur_rank - $pre_rank) . "</font> <img src='icon/Down.jpg'>";
+							$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), ($cur_rank - $pre_rank) );
+							$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_red );
+							$objDrawingDown->setCoordinates ( 'H' . strval ( $i + 4 ) );
+							$objDrawingDown->setWorksheet ( $objPHPExcel->getActiveSheet () );
+						}
+					} else if ($change < 0) {
+						if ($cur_rank == 0) {
+							echo "<font style='color: red;'>" . str_replace ( '-', '', ($cur_rank - $pre_rank) ) . "</font> <img src='icon/Down.jpg'>";
+							$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), str_replace ( '-', '', ($pre_rank - $cur_rank) ) );
+							$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_red );
+							$objDrawingDown->setCoordinates ( 'H' . strval ( $i + 4 ) );
+							$objDrawingDown->setWorksheet ( $objPHPExcel->getActiveSheet () );
+						} else {
+							echo "<font style='color: green;'>" . ($pre_rank - $cur_rank) . "</font> <img src='icon/up.jpg'>";
+							$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), ($cur_rank - $pre_rank) );
+							$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_green );
+							$objDrawingUp->setCoordinates ( 'H' . strval ( $i + 4 ) );
+							$objDrawingUp->setWorksheet ( $objPHPExcel->getActiveSheet () );
+						}
+					} else {
+						echo "<font style='color: green;'> 0 </font>";
+						$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), '0' );
+						$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_green );
+					}
+					?></td>
+					<td><?php 
+						echo '<a href="http://' . $path . '">' . $path . '</a>';
+						$objPHPExcel->getActiveSheet ()->setCellValue ( 'I' . strval ( $i + 4 ), $path );
+					
+					?></td>
+				</tr>
+		<?php 
+				}
 			}
-			
-			?></td>
-		</tr>
-<?php 
+			$objPHPExcel->getActiveSheet ()->setTitle ( $_POST ['reportdate'] );
+			$objWriter->save ( 'templates/' . $file_name );
 		}
-	}
-	$objPHPExcel->getActiveSheet ()->setTitle ( $_POST ['reportdate'] );
-	$objWriter->save ( 'templates/' . $file_name );
-}
-?>
-</table>
-Click Download file report: <a href="templates/<?php echo $file_name; ?>" title="<?php echo $file_name; ?>"><?php echo $file_name; ?></a>
-</body>
-</html>
+		?>
+		</table>
+		Click Download file report: <a href="templates/<?php echo $file_name; ?>" title="<?php echo $file_name; ?>"><?php echo $file_name; ?></a>
+		</body>
+		</html>
+				
