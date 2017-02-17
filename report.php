@@ -200,16 +200,13 @@ if ($_POST) {
 			$objPHPExcel->getActiveSheet ()->setCellValue ( 'E' . strval ( $i + 4 ), $row [$i] ['rank'] );
 			$objPHPExcel->getActiveSheet ()->setCellValue ( 'F' . strval ( $i + 4 ), $row [$i] ['pre_rank'] );
 			?>
-	<tr>
+		<tr>
 			<td><?php echo $row[$i]['date']; ?></td>
 			<td><?php echo str_replace("+"," ",$row[$i]['keyword']);?></td>
 			<td><?php echo $row[$i]['engine']; ?></td>
 			<td><?php echo "English"; ?></td>
 			<td><?php echo $row[$i]['rank']; ?></td>
-			<td>
-			<?php 
-			echo $row[$i]['pre_rank'];
-			echo '</td><td>';
+			<td><?php 
 			$cur_rank = $row [$i] ['rank'];
 			$pre_rank = $row [$i] ['pre_rank'];
 			$change = $cur_rank - $pre_rank;
@@ -258,17 +255,23 @@ if ($_POST) {
 				$objPHPExcel->getActiveSheet ()->setCellValue ( 'G' . strval ( $i + 4 ), '0' );
 				$objPHPExcel->getActiveSheet ()->getStyle ( 'G' . strval ( $i + 4 ) )->applyFromArray ( $style_color_green );
 			}
-			echo '</td><td>';
-			if (isset ( $row [$i] ['url'] )) {
-				echo '<a href=' . $row [$i] ['url'] . '">' . $row [$i] ['url'] . '</a>';
-				$objPHPExcel->getActiveSheet ()->setCellValue ( 'I' . strval ( $i + 4 ), $row [$i] ['url'] );
+			?></td>
+			<td><?php 
+			if (isset ( $row [$i] ['path'] )) {
+				echo '<a href="http://' . $row [$i] ['path'] . '">' . $row [$i] ['path'] . '</a>';
+				$objPHPExcel->getActiveSheet ()->setCellValue ( 'I' . strval ( $i + 4 ), $row [$i] ['path'] );
 			}
 			
-			echo '</td></tr>';
+			?></td>
+		</tr>
+<?php 
 		}
 	}
 	$objPHPExcel->getActiveSheet ()->setTitle ( $_POST ['reportdate'] );
 	$objWriter->save ( 'templates/' . $file_name );
 }
-echo '</table>Click Download file report: <a href="templates/'.  $file_name . 'title="' . $file_name . '">' . $file_name . '</a></body></html>';
-
+?>
+</table>
+Click Download file report: <a href="templates/<?php echo $file_name; ?>" title="<?php echo $file_name; ?>"><?php echo $file_name; ?></a>
+</body>
+</html>
