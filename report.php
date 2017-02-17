@@ -167,6 +167,7 @@ if ($_POST) {
 		$file_py_path = 'python /home/admin/web/tools.clads.link/public_shtml/search.py ';
 		$result = passthru ( $file_py_path . trim ( $data_py ) );
 		$result = ob_get_clean ();
+		ob_end_clean();
 		// rank@@url
 		$result = explode ( '@@', trim ( $result ) );
 		if (count ( $result ) > 1) {
@@ -206,7 +207,9 @@ if ($_POST) {
 			<td><?php echo $row[$i]['engine']; ?></td>
 			<td><?php echo "English"; ?></td>
 			<td><?php echo $row[$i]['rank']; ?></td>
-			<td><?php echo $row[$i]['pre_rank'];
+			<td>
+			<?php 
+			echo $row[$i]['pre_rank'];
 			echo '</td><td>';
 			$cur_rank = $row [$i] ['rank'];
 			$pre_rank = $row [$i] ['pre_rank'];
