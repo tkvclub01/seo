@@ -28,12 +28,11 @@ include_once 'lib/PHPExcel/IOFactory.php';
 				
 			
 			$path = 'upload/'.$file_name;
+			var_dump($file_name);die();
 			$upload = move_uploaded_file($_FILES['file_name']['tmp_name'], $path);
 			error_reporting(E_ERROR | E_PARSE);
 			copy($file_name, $path);
-			
 			$objPHPExcel = PHPExcel_IOFactory::load($path);
-			var_dump($objPHPExcel); die();
 			foreach ($objPHPExcel->getWorksheetIterator() as $worksheet) {
 				$worksheetTitle     = $worksheet->getTitle();
 				$highestRow         = $worksheet->getHighestRow(); // e.g. 10
