@@ -31,7 +31,6 @@ include_once 'lib/PHPExcel/IOFactory.php';
 			error_reporting(E_ERROR | E_PARSE);
 			copy($file_name, $path);
 			$objPHPExcel = PHPExcel_IOFactory::load($path);
-			var_dump($objPHPExcel);die();
 			foreach ($objPHPExcel->getWorksheetIterator() as $worksheet) {
 				$worksheetTitle     = $worksheet->getTitle();
 				$highestRow         = $worksheet->getHighestRow(); // e.g. 10
