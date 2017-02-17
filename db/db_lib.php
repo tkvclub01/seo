@@ -146,8 +146,7 @@ function get_content_by_date($string_date, $keywords, $domain, $search_engine) {
 		$condition .= " and domain = '$domain' ";
 	}
 
-	$sql = "SELECT * FROM (SELECT * FROM page_rank WHERE date = '$date_rp' and search_engine = '$search_engine'" . $condition . 'ORDER BY id DESC) AS tbl GROUP BY keyword';
-	var_dump($sql);
+	$sql = "SELECT DISTINCT * FROM (SELECT * FROM page_rank WHERE date = '$date_rp' and search_engine = '$search_engine'" . $condition . 'ORDER BY id DESC) AS tbl';
 	$db->query ( $sql );
 	while ( $row = $db->fetch_array () ) {
 		$list_data [] = array (
