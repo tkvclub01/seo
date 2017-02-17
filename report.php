@@ -146,7 +146,7 @@ if ($_POST) {
 	
 	for($k = 0; $k < count ( $list_keywords ); $k ++) {
 		$i = 1;
-		
+		var_dump($list_keywords [$k]);
 		$keyword = trim ( $list_keywords [$k] );
 		
 		// Loop through the nodes to look for our domain
