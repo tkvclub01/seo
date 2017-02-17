@@ -1,7 +1,7 @@
 <?php 
 	ob_start(); 
 	session_start();
-
+	error_reporting(0);
 	$dir = "images/background/";
 	// Open a directory, and read its contents
 	$bg_array  = array();
