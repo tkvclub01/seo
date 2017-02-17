@@ -162,14 +162,12 @@ if ($_POST) {
 			$url_para = "." . $url_para;
 		}
 		$data_py = $url_para . "@@" . $domain . "@@" . $keyword;
-		var_dump($data_py);
 		ob_start ();
-		$file_py_path = 'python search.py ';
+		$file_py_path = 'python /home/admin/web/tools.clads.link/public_shtml/search.py ';
 		$result = passthru ( $file_py_path . trim ( $data_py ) );
 		$result = ob_get_clean ();
 		// rank@@url
 		$result = explode ( '@@', trim ( $result ) );
-		var_dump($result);
 		if (count ( $result ) > 1) {
 			$rank = intval(trim(substr ( $result [0], - 2 )));
 			$path = $result [1];
