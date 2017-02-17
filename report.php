@@ -167,13 +167,14 @@ if ($_POST) {
 		$file_py_path = 'python search.py ';
 		$result = passthru ( $file_py_path . trim ( $data ) );
 		$result = ob_get_clean ();
-		var_dump($result);
 		// rank@@url
 		$result = explode ( '@@', trim ( $result ) );
 		if (count ( $result ) > 1) {
 			$rank = trim(substr ( $result [0], - 2 ));
 			$path = $result [1];
 		}
+		var_dump($rank);
+		var_dump($path);
 		$pre_result = search_result ( $keyword, $domain, trim ( $_POST ['googleUrl'] ) );
 		if (! empty ( $pre_result )) {
 			$id = $pre_result ['id'];
