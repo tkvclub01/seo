@@ -184,7 +184,6 @@ if ($_POST) {
 		}
 	}
 	
-	var_dump($_POST ['report']);
 	
 	if (isset ( $_POST ['report'] )) {
 		if (isset ( $_POST ['reportdate'] )) {
@@ -192,6 +191,7 @@ if ($_POST) {
 		} else {
 			echo "Please back to index";
 		}
+		var_dump($row);
 		for($i = 0; $i < count ( $row ); $i ++) {
 			// Write content to excel
 			$objPHPExcel->getActiveSheet ()->setCellValue ( 'A' . strval ( $i + 4 ), $row [$i] ['date'] );
