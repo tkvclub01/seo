@@ -4,6 +4,10 @@ include_once('functions.php');
 
 include_once 'lib/PHPExcel.php';
 include_once 'lib/PHPExcel/IOFactory.php';
+ini_set("display_errors", 1);
+ini_set("track_errors", 1);
+ini_set("html_errors", 1);
+error_reporting(E_ALL);
 ?>
 <div id="content" class="container col-md-12">
 	<?php 
@@ -40,7 +44,6 @@ include_once 'lib/PHPExcel/IOFactory.php';
 				$highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
 				$nrColumns = ord($highestColumn) - 64;
 			}
-			echo "test";
 			for ($row = 4; $row <= $highestRow; ++ $row) {
 				$val=array();
 				for ($col = 0; $col < $highestColumnIndex; ++ $col) {
