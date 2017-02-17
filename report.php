@@ -21,7 +21,7 @@ require ('lib/PHPExcel.php');
 	<center>
 		<h1> "<?php echo $_POST['domain'];?>" report (<?php echo $_POST['reportdate']?>)</h1>
 	</center>
-	
+
 	<table class="bordered">
 		<tr>
 			<th>Update date</th>
@@ -44,7 +44,7 @@ if ($_POST) {
 	$googleUrl = $_POST ['googleUrl'];
 	
 	// Clean the post data and make usable
-	$domain  =   $_POST ['domain'];
+	$domain = $_POST ['domain'];
 	$keywords = $_POST ['keywords'];
 	
 	$keywords = trim ( $_POST ['keywords'] );
@@ -57,7 +57,7 @@ if ($_POST) {
 	$domain = substr ( $domain, - 1 ) == '/' ? substr_replace ( $domain, '', - 1 ) : $domain;
 	
 	// Create file excel
-	$file_name = "rank_report_" . $domain . "_" .$_POST ['reportdate']. ".xlsx";
+	$file_name = "rank_report_" . $domain . "_" . $_POST ['reportdate'] . ".xlsx";
 	if (file_exists ( 'templates/' . $file_name )) {
 		unlink ( 'templates/' . $file_name );
 	}
@@ -83,41 +83,43 @@ if ($_POST) {
 			'font' => array (
 					'bold' => true,
 					'color' => array (
-							'rgb' => '666666'
+							'rgb' => '666666' 
 					),
 					'size' => 9,
-					'name' => 'Verdana'
+					'name' => 'Verdana' 
 			),
-			'fill' => array(
+			'fill' => array (
 					'type' => PHPExcel_Style_Fill::FILL_SOLID,
-					'color' => array('rgb' => 'dce9f9')
-			)
+					'color' => array (
+							'rgb' => 'dce9f9' 
+					) 
+			) 
 	);
 	
 	$style_color_red = array (
 			'font' => array (
 					'color' => array (
-							'rgb' => 'ff0000'
-					)
-			)
+							'rgb' => 'ff0000' 
+					) 
+			) 
 	);
 	$style_color_green = array (
 			'font' => array (
 					'color' => array (
-							'rgb' => '00ff0c'
-					)
-			)
+							'rgb' => '00ff0c' 
+					) 
+			) 
 	);
 	
-	$objPHPExcel->getActiveSheet ()->getColumnDimension('A')->setWidth(15);
-	$objPHPExcel->getActiveSheet ()->getColumnDimension('B')->setWidth(40);
-	$objPHPExcel->getActiveSheet ()->getColumnDimension('C')->setWidth(15);
-	$objPHPExcel->getActiveSheet ()->getColumnDimension('D')->setWidth(10);
-	$objPHPExcel->getActiveSheet ()->getColumnDimension('E')->setWidth(15);
-	$objPHPExcel->getActiveSheet ()->getColumnDimension('F')->setWidth(15);
-	$objPHPExcel->getActiveSheet ()->getColumnDimension('G')->setWidth(10);
-	$objPHPExcel->getActiveSheet ()->getColumnDimension('H')->setWidth(10);
-	$objPHPExcel->getActiveSheet ()->getColumnDimension('I')->setWidth(50);
+	$objPHPExcel->getActiveSheet ()->getColumnDimension ( 'A' )->setWidth ( 15 );
+	$objPHPExcel->getActiveSheet ()->getColumnDimension ( 'B' )->setWidth ( 40 );
+	$objPHPExcel->getActiveSheet ()->getColumnDimension ( 'C' )->setWidth ( 15 );
+	$objPHPExcel->getActiveSheet ()->getColumnDimension ( 'D' )->setWidth ( 10 );
+	$objPHPExcel->getActiveSheet ()->getColumnDimension ( 'E' )->setWidth ( 15 );
+	$objPHPExcel->getActiveSheet ()->getColumnDimension ( 'F' )->setWidth ( 15 );
+	$objPHPExcel->getActiveSheet ()->getColumnDimension ( 'G' )->setWidth ( 10 );
+	$objPHPExcel->getActiveSheet ()->getColumnDimension ( 'H' )->setWidth ( 10 );
+	$objPHPExcel->getActiveSheet ()->getColumnDimension ( 'I' )->setWidth ( 50 );
 	
 	$objPHPExcel->getActiveSheet ()->setCellValue ( 'A1', $_POST ['domain'] . ' report (' . $_POST ['reportdate'] . ')' );
 	$objPHPExcel->getActiveSheet ()->getStyle ( 'A1' )->applyFromArray ( $style_text_center );
@@ -147,7 +149,6 @@ if ($_POST) {
 		
 		$keyword = trim ( $list_keywords [$k] );
 		
-		
 		// Loop through the nodes to look for our domain
 		
 		$rank = '0';
@@ -155,22 +156,22 @@ if ($_POST) {
 		$date = string_to_date ( $_POST ['reportdate'] );
 		// This is the data you want to pass to Python
 		
-		$url_para =  end(explode('.', $_POST ['googleUrl']));
-		if($url_para == 'com'){
+		$url_para = end ( explode ( '.', $_POST ['googleUrl'] ) );
+		if ($url_para == 'com') {
 			$url_para = "";
-		}else{
+		} else {
 			$url_para = "." . $url_para;
 		}
-		$data = $url_para . "@@".$domain."@@".$keyword;
-		ob_start();
-                $file_py_path = 'python '.getcwd().'/search.py ';
-		$result = passthru( $file_py_path . trim($data) );
-                $result = ob_get_clean();
-		//rank@@url
-		$result = explode('@@', trim($result));
-		if (count($result) > 1){
-			$rank = substr($result[0], -1);
-			$path = $result[1];
+		$data = $url_para . "@@" . $domain . "@@" . $keyword;
+		ob_start ();
+		$file_py_path = 'python search.py ';
+		$result = passthru ( $file_py_path . trim ( $data ) );
+		$result = ob_get_clean ();
+		// rank@@url
+		$result = explode ( '@@', trim ( $result ) );
+		if (count ( $result ) > 1) {
+			$rank = substr ( $result [0], - 1 );
+			$path = $result [1];
 		}
 		$pre_result = search_result ( $keyword, $domain, trim ( $_POST ['googleUrl'] ) );
 		if (! empty ( $pre_result )) {
@@ -271,6 +272,8 @@ if ($_POST) {
 }
 ?>
 </table>
-Click Download file report: <a href="templates/<?php echo $file_name; ?>" title="<?php echo $file_name; ?>"><?php echo $file_name; ?></a>
+	Click Download file report:
+	<a href="templates/<?php echo $file_name; ?>"
+		title="<?php echo $file_name; ?>"><?php echo $file_name; ?></a>
 </body>
 </html>

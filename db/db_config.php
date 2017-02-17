@@ -1,6 +1,6 @@
 <?php
 define("DBHOST",'localhost');
-define("DBNAME",'rank_report');
-define("DBUSER",'root');
-define("DBPWD",'');
+define("DBNAME",'admin_rank_report');
+define("DBUSER",'admin_dato_seo');
+define("DBPWD",'ScKei4qtRR');
 ?>
