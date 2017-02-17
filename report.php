@@ -171,7 +171,7 @@ if ($_POST) {
 		// rank@@url
 		$result = explode ( '@@', trim ( $result ) );
 		if (count ( $result ) > 1) {
-			$rank = substr ( $result [0], - 1 );
+			$rank = trim(substr ( $result [0], - 2 ));
 			$path = $result [1];
 		}
 		$pre_result = search_result ( $keyword, $domain, trim ( $_POST ['googleUrl'] ) );
