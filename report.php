@@ -1,5 +1,4 @@
-﻿
-<?php
+﻿<?php
 /** Error reporting */
 // error_reporting(0);
 if ($_POST ['domain'] == '') {
@@ -42,7 +41,6 @@ if ($_POST) {
 	// Create Oj excel
 	$objPHPExcel = new PHPExcel ();
 	$objWriter = new PHPExcel_Writer_Excel2007 ( $objPHPExcel );
-	
 	$googleUrl = $_POST ['googleUrl'];
 	
 	// Clean the post data and make usable
@@ -165,12 +163,13 @@ if ($_POST) {
 		}
 		$data = $url_para . "@@".$domain."@@".$keyword;
 		ob_start();
-		$result = passthru( 'python '.getcwd().'\search.py ' . trim($data) );
-		$result = ob_get_clean();
+                $file_py_path = 'python '.getcwd().'/search.py ';
+		$result = passthru( $file_py_path . trim($data) );
+                $result = ob_get_clean();
 		//rank@@url
-		$result = split('@@', $result);
+		$result = explode('@@', trim($result));
 		if (count($result) > 1){
-			$rank = $result[0];
+			$rank = substr($result[0], -1);
 			$path = $result[1];
 		}
 		$pre_result = search_result ( $keyword, $domain, trim ( $_POST ['googleUrl'] ) );
