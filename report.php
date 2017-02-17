@@ -258,9 +258,9 @@ if ($_POST) {
 			}
 			?></td>
 			<td><?php
-			if (isset ( $row [$i] ['path'] )) {
-				echo '<a href="https://' . $row [$i] ['path'] . '">' . $row [$i] ['path'] . '</a>';
-				$objPHPExcel->getActiveSheet ()->setCellValue ( 'I' . strval ( $i + 4 ), $row [$i] ['path'] );
+			if (isset ( $row [$i] ['url'] )) {
+				echo '<a href=' . $row [$i] ['url'] . '">' . $row [$i] ['url'] . '</a>';
+				$objPHPExcel->getActiveSheet ()->setCellValue ( 'I' . strval ( $i + 4 ), $row [$i] ['url'] );
 			}
 			
 			?></td>
