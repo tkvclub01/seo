@@ -56,16 +56,15 @@ error_reporting ( 0 );
 	
 	if (empty ( $keyword )) {
 		$sql_query = "SELECT  d.* FROM data  as d 
-						JOIN ( SELECT `updated-date` as date_tmp FROM DATA WHERE project_id = " . $_GET ['project_id'] . $create_at_query . $para_search_engine_query . " ORDER BY `updated-date` DESC LIMIT 1 ) AS abc
+						JOIN ( SELECT `updated-date` as date_tmp FROM data WHERE project_id = " . $_GET ['project_id'] . $create_at_query . $para_search_engine_query . " ORDER BY `updated-date` DESC LIMIT 1 ) AS abc
 						ON d.`updated-date` = abc.date_tmp
 						where d.project_id = " . $_GET ['project_id'] . $create_at . $para_search_engine;
 	} else {
 		$sql_query = "SELECT  d.* FROM data  as d
-						JOIN ( SELECT `updated-date` as date_tmp FROM DATA WHERE project_id = " . $_GET ['project_id'] . $create_at_query . $para_search_engine_query . " ORDER BY `updated-date` DESC LIMIT 1 ) AS abc
+						JOIN ( SELECT `updated-date` as date_tmp FROM data WHERE project_id = " . $_GET ['project_id'] . $create_at_query . $para_search_engine_query . " ORDER BY `updated-date` DESC LIMIT 1 ) AS abc
 						ON d.`updated-date` = abc.date_tmp
 						where d.keywords LIKE ? and d.project_id = " . $_GET ['project_id'] . $create_at . $para_search_engine;
 	}
-	var_dump($sql_query);
 	$stmt = $connect->stmt_init ();
 	if ($stmt->prepare ( $sql_query )) {
 		// Bind your variables to replace the ?s
