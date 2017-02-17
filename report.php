@@ -186,12 +186,12 @@ if ($_POST) {
 	
 	
 	if (isset ( $_POST ['report'] )) {
+		var_dump($_POST ['reportdate']);
 		if (isset ( $_POST ['reportdate'] )) {
 			$row = get_content_by_date ( $_POST ['reportdate'], $_POST ['keywords'], $_POST ['domain'], trim ( $_POST ['googleUrl'] ) );
 		} else {
 			echo "Please back to index";
 		}
-		var_dump($row);
 		for($i = 0; $i < count ( $row ); $i ++) {
 			// Write content to excel
 			$objPHPExcel->getActiveSheet ()->setCellValue ( 'A' . strval ( $i + 4 ), $row [$i] ['date'] );
