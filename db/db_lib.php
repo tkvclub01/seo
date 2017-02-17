@@ -153,7 +153,7 @@ function get_content_by_date($string_date, $keywords, $domain, $search_engine) {
 				'id' => $row ['id'],
 				'date' => $row ['date'],
 				'keyword' => $row ['keyword'],
-				'path' => $row ['url'],
+				'url' => $row ['url'],
 				'rank' => $row ['rank'],
 				'pre_rank' => $row ['pre_rank'],
 				'engine' => $row ['search_engine']
