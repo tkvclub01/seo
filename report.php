@@ -163,11 +163,10 @@ if ($_POST) {
 		}
 		$data_py = $url_para . "@@" . $domain . "@@" . $keyword;
 		$data_py = str_replace(" ", "+", $data_py);
-		ob_start ();
 		$file_py_path = 'python /home/admin/web/tools.clads.link/public_shtml/search.py ';
+		ob_start ();
 		$result = passthru ( $file_py_path . trim ( $data_py ) );
 		$result = ob_get_clean ();
-		ob_end_clean();
 		// rank@@url
 		$result = explode ( '@@', trim ( $result ) );
 		if (count ( $result ) > 1) {
