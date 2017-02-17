@@ -168,6 +168,7 @@ if ($_POST) {
 		$result = ob_get_clean ();
 		// rank@@url
 		$result = explode ( '@@', trim ( $result ) );
+		var_dump($result);
 		if (count ( $result ) > 1) {
 			$rank = intval(trim(substr ( $result [0], - 2 )));
 			$path = $result [1];
@@ -258,7 +259,7 @@ if ($_POST) {
 			?></td>
 			<td><?php
 			if (isset ( $row [$i] ['path'] )) {
-				echo '<a href="http://' . $row [$i] ['path'] . '">' . $row [$i] ['path'] . '</a>';
+				echo '<a href="https://' . $row [$i] ['path'] . '">' . $row [$i] ['path'] . '</a>';
 				$objPHPExcel->getActiveSheet ()->setCellValue ( 'I' . strval ( $i + 4 ), $row [$i] ['path'] );
 			}
 			
