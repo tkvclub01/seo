@@ -104,7 +104,7 @@
 <body>
 <div id="main-container">
 <div id="form-container">
-<h1>Report keywords rank</h1>
+<h1>Report keywords rank <a href="/appseo" title="Go To Admin Page">GO TO ADMIN</a></h1>
 <form action="report.php" method="post" id="report">
 		<p>Google Url:</p>
 		<select name="googleUrl" style="width:330px">
