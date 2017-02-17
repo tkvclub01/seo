@@ -186,7 +186,6 @@ if ($_POST) {
 	
 	
 	if (isset ( $_POST ['report'] )) {
-		var_dump($_POST ['reportdate']);
 		if (isset ( $_POST ['reportdate'] )) {
 			$row = get_content_by_date ( $_POST ['reportdate'], $_POST ['keywords'], $_POST ['domain'], trim ( $_POST ['googleUrl'] ) );
 		} else {
