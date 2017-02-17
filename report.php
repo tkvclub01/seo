@@ -258,8 +258,8 @@ if ($_POST) {
 					}
 					?></td>
 					<td><?php 
-						echo '<a href="http://' . $path . '">' . $path . '</a>';
-						$objPHPExcel->getActiveSheet ()->setCellValue ( 'I' . strval ( $i + 4 ), $path );
+						echo '<a href="http://' . $row [$i] ['url'] . '">' . $row [$i] ['url'] . '</a>';
+						$objPHPExcel->getActiveSheet ()->setCellValue ( 'I' . strval ( $i + 4 ), $row [$i] ['url'] );
 					
 					?></td>
 				</tr>
