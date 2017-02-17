@@ -65,6 +65,7 @@ error_reporting ( 0 );
 						ON d.`updated-date` = abc.date_tmp
 						where d.keywords LIKE ? and d.project_id = " . $_GET ['project_id'] . $create_at . $para_search_engine;
 	}
+	var_dump($sql_query);
 	$stmt = $connect->stmt_init ();
 	if ($stmt->prepare ( $sql_query )) {
 		// Bind your variables to replace the ?s
