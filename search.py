@@ -8,4 +8,6 @@ index = len(search_results)
 result = '0@@ '
 if index >= 1:
     result =   str(search_results[index-1].rank) + "@@" + str(search_results[index-1].link)
+else:
+    result = '0@@ '
 print result    
