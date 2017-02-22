@@ -130,7 +130,7 @@ error_reporting(E_ALL);
 		
 	?>
 	<div class="col-md-12">
-		<h1>Edit Category</h1>
+		<h1>Import Project</h1>
 		<?php echo isset($error['update_projects']) ? $error['update_projects'] : '';?>
 		<hr />
 	</div>

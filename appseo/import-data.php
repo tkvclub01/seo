@@ -114,7 +114,7 @@
 		  border-radius: 50%;
 		}
 		</style>
-        <title>Add Project</title>
+        <title>Import Project</title>
     </head>
     <body background="images/background/<?php echo $bg_array[$int_random]; ?>">
     	<div id="container">
