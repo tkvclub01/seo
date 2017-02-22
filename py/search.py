@@ -1,8 +1,6 @@
-from google import google
-num_page = 1
-search_results = google.search("dantri", num_page,"en",True,"","dantri.com.vn")
-index = len(search_results)
-result = {"rank":0, "url":""}
-if index > 0:
-    result = {"rank":search_results[index-1].rank, "url":search_results[index-1].link}
-print result    
+from oauth2client import client
+
+flow = client.flow_from_clientsecrets(
+    'client_secrets.json',
+    scope='https://www.googleapis.com/auth/drive.metadata.readonly',
+    redirect_uri='https://tools.clads.link/oauth2callback')  
